@@ -1,0 +1,8 @@
+<!ENTITY remoteit.label "De-Remote It">
+<!ENTITY remoteitContext.label "De-Remote It">
+<!ENTITY remoteitContext.accesskey "R">
+<!ENTITY remoteitToolbarButton.label "Remote It">
+<!ENTITY remoteitToolbarButton.tooltip "Click here to convert the URL to remote!">
+<!ENTITY remoteitSidebar.label "Remote It Sidebar">
+<!ENTITY remoteitToolbar.name  "remoteit">
+<!ENTITY remoteitToolbar.label "This is an example toolbar. You can hide it under View &gt; toolbars &gt; &remoteitToolbar.name;">

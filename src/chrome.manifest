@@ -1,0 +1,7 @@
+content   remoteit                 chrome/content/
+skin      remoteit   classic/1.0   chrome/skin/
+locale    remoteit   en-US         chrome/locale/en-US/
+
+
+overlay   chrome://browser/content/browser.xul   chrome://remoteit/content/ff-overlay.xul
+style chrome://global/content/customizeToolbar.xul chrome://remoteit/skin/overlay.css
