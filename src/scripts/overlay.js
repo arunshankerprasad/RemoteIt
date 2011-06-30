@@ -44,7 +44,12 @@ var remoteit = {
 
 	remoteIt : function(url) {
 		var remoted = url;
+		remoted = 'http://www.google.com/';
 		return remoted;
+	},
+
+	handleException : function(exp) {
+		alert(exp);
 	}
 
 };

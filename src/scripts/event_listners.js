@@ -64,9 +64,16 @@ var remoteitListener = {
 		// aWebProgress.DOMWindow to obtain the tab/window which triggers the
 		// state change
 		if (aFlag & STATE_IS_REQUEST) {
-			if (aRequest && remoteit.shouldWeHandleThisURL(aRequest.name)) {
-				aRequest.suspend();
-				openUILinkIn(remoteit.remoteit(aRequest.name), "current");
+			// alert(aRequest.name);
+			// typeof aRequest != 'undefined'
+			try {
+				if (remoteit.shouldWeHandleThisURL(aRequest.name)) {
+					aRequest.suspend();
+					aRequest.cancel(Components.results.NS_BINDING_ABORTED);
+					openUILinkIn(remoteit.remoteIt(aRequest.name), "current");
+				}
+			} catch (exp) {
+				remoteit.handleExceptions(exp);
 			}
 			// This fires when the load event is initiated
 		}
