@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<project name="remoteit" basedir="." default="usage">
+
+	<property name="name" value="remoteit" />
+	<property name="lib.dir" value="lib" />
+	<property name="src.dir" value="src" />
+	<property name="src.xpi.dir" value="${src.dir}/xpi" />
+	<property name="src.xpi.content.dir" value="${src.xpi.dir}/chrome/content" />
+	<property name="src.js.dir" value="${src.dir}/js" />
+	<property name="build.dir" value="build" />
+	<property name="xpi.dir" value="${build.dir}/xpi" />
+	<property name="xpi.file.name" value="remoteit.xpi" />
+	<property name="xpi.file.loc" value="${xpi.dir}/${xpi.file.name}" />
+	<property name="zip.base.dir" value="${src.xpi.dir}" />
+
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+
+		<classpath>
+			<pathelement location="${lib.dir}/ant-contrib-1.0b3.jar" />
+		</classpath>
+
+	</taskdef>
+
+	<target name="usage">
+
+		<echo message="" />
+		<echo message="Remote It build" />
+		<echo message="------------------------------------------------------" />
+		<echo message="" />
+		<echo message="Available targets are:" />
+		<echo message="" />
+		<echo message="clean    --> Clean out old builds" />
+		<echo message="xpi      --> Build the firefox addon archive (xpi (zippy))" />
+		<echo message="all      --> Clean, xpi" />
+		<echo message="" />
+
+	</target>
+
+	<target name="clean" description="Clean out old builds (build)">
+
+		<delete dir="${build.dir}" />
+		<echo message="Clean it up" />
+
+	</target>
+
+	<target name="yui" description="Yahoo UI compressor">
+
+		<echo message="File: ${foreach.name.ext}" />
+
+		<!--<java jar="${lib.dir}/yuicompressor-2.4.6.jar" fork="true">
+			<arg value="-o ${src.xpi.content.dir}/${foreach.name.ext}" />
+			<arg value="${src.js.dir}/${foreach.name.ext}" />
+		</java>-->
+
+	</target>
+
+	<target name="obfuscate" description="Obfuscate my JS">
+
+		<foreach target="yui" param="foreach.name.ext">
+
+			<path id="js.path">
+				<pathelement path="${src.js.dir}" />
+				<fileset dir="${src.js.dir}" casesensitive="yes">
+					<include name="**/*.js" />
+				</fileset>
+			</path>
+
+		</foreach>
+
+	</target>
+
+	<target name="xpi" description="Clean out old builds (build)" depends="obfuscate">
+
+		<mkdir dir="${xpi.dir}" />
+
+		<zip destfile="${xpi.file.loc}" basedir="${zip.base.dir}">
+		</zip>
+		<echo message="XPI (zippy) created.." />
+
+	</target>
+
+	<target name="all" depends="clean, xpi" description="Clean, xpi">
+		<echo message="All Done!! XPI is in ${xpi.file.loc}" />
+	</target>
+
+</project>

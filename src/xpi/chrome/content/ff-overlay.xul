@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://remoteit/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://remoteit/locale/overlay.dtd">
+<overlay id="remoteit-overlay"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script src="overlay.js" />
+	<script src="event_listners.js" />
+	<script src="ff-overlay.js" />
+
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="remoteit-strings"
+			src="chrome://remoteit/locale/overlay.properties" />
+	</stringbundleset>
+
+	<popup id="contentAreaContextMenu">
+		<menuitem id="context-remoteit" label="&remoteitContext.label;"
+			accesskey="&remoteitContext.accesskey;" insertafter="context-stop"
+			oncommand="remoteit.onMenuItemCommand(event)" />
+	</popup>
+
+	<!-- <toolbarpalette id="BrowserToolbarPalette"> -->
+	<!-- <toolbarbutton id="remoteit-toolbar-button" class="toolbarbutton-1 
+		chromeclass-toolbar-additional" -->
+	<!-- label="&remoteitToolbarButton.label;" tooltiptext="&remoteitToolbarButton.tooltip;" -->
+	<!-- oncommand="remoteit.onToolbarButtonCommand()"/> -->
+	<!-- </toolbarpalette> -->
+
+</overlay>

@@ -5,4 +5,4 @@
 <!ENTITY remoteitToolbarButton.tooltip "Click here to convert the URL to remote!">
 <!ENTITY remoteitSidebar.label "Remote It Sidebar">
 <!ENTITY remoteitToolbar.name  "remoteit">
-<!ENTITY remoteitToolbar.label "This is an example toolbar. You can hide it under View &gt; toolbars &gt; &remoteitToolbar.name;">
+<!ENTITY remoteitToolbar.label "Remote It toolbar. You can hide it under View &gt; toolbars &gt; &remoteitToolbar.name;">
