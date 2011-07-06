@@ -1,47 +1,47 @@
-//var myExt_urlBarListener = {
-//	QueryInterface : function(aIID) {
-//		if (aIID.equals(Components.interfaces.nsIWebProgressListener)
-//				|| aIID.equals(Components.interfaces.nsISupportsWeakReference)
-//				|| aIID.equals(Components.interfaces.nsISupports))
-//			return this;
-//		throw Components.results.NS_NOINTERFACE;
-//	},
+// var myExt_urlBarListener = {
+// QueryInterface : function(aIID) {
+// if (aIID.equals(Components.interfaces.nsIWebProgressListener)
+// || aIID.equals(Components.interfaces.nsISupportsWeakReference)
+// || aIID.equals(Components.interfaces.nsISupports))
+// return this;
+// throw Components.results.NS_NOINTERFACE;
+// },
 //
-//	onLocationChange : function(aProgress, aRequest, aURI) {
-//		myExtension.processNewURL(aURI);
-//	},
+// onLocationChange : function(aProgress, aRequest, aURI) {
+// myExtension.processNewURL(aURI);
+// },
 //
-//	onStateChange : function(a, b, c, d) {
-//	},
-//	onProgressChange : function(a, b, c, d, e, f) {
-//	},
-//	onStatusChange : function(a, b, c, d) {
-//	},
-//	onSecurityChange : function(a, b, c) {
-//	}
-//};
+// onStateChange : function(a, b, c, d) {
+// },
+// onProgressChange : function(a, b, c, d, e, f) {
+// },
+// onStatusChange : function(a, b, c, d) {
+// },
+// onSecurityChange : function(a, b, c) {
+// }
+// };
 //
-//var myExtension = {
-//	oldURL : null,
+// var myExtension = {
+// oldURL : null,
 //
-//	init : function() {
-//		// Listen for webpage loads
-//		gBrowser.addProgressListener(myExt_urlBarListener,
-//				Components.interfaces.nsIWebProgress.NOTIFY_LOCATION);
-//	},
+// init : function() {
+// // Listen for webpage loads
+// gBrowser.addProgressListener(myExt_urlBarListener,
+// Components.interfaces.nsIWebProgress.NOTIFY_LOCATION);
+// },
 //
-//	uninit : function() {
-//		gBrowser.removeProgressListener(myExt_urlBarListener);
-//	},
+// uninit : function() {
+// gBrowser.removeProgressListener(myExt_urlBarListener);
+// },
 //
-//	processNewURL : function(aURI) {
-//		if (aURI.spec == this.oldURL)
-//			return;
+// processNewURL : function(aURI) {
+// if (aURI.spec == this.oldURL)
+// return;
 //
-//		// now we know the url is new...
-//		this.oldURL = aURI.spec;
-//	}
-//};
+// // now we know the url is new...
+// this.oldURL = aURI.spec;
+// }
+// };
 
 const
 STATE_START = Components.interfaces.nsIWebProgressListener.STATE_START;
@@ -65,9 +65,13 @@ var remoteitListener = {
 		// state change
 		if (aFlag & STATE_IS_REQUEST) {
 			// alert(aRequest.name);
-			// typeof aRequest != 'undefined'
+			// typeof aRequest != "undefined"
 			try {
-				if (remoteit.shouldWeHandleThisURL(aRequest.name)) {
+				var url = aRequest.name;
+				remoteItUtils.debug("Handling new request : " + url);
+				if (remoteItUtils.shouldWeHandleThisURL(url)) {
+					remoteItUtils.debug("Going to interrupt current request");
+
 					aRequest.suspend();
 					aRequest.cancel(Components.results.NS_BINDING_ABORTED);
 					openUILinkIn(remoteit.remoteIt(aRequest.name), "current");
@@ -93,8 +97,7 @@ var remoteitListener = {
 	},
 
 	// For definitions of the remaining functions see related documentation
-	onProgressChange : function(aWebProgress, aRequest, curSelf, maxSelf,
-			curTot, maxTot) {
+	onProgressChange : function(aWebProgress, aRequest, curSelf, maxSelf, curTot, maxTot) {
 	},
 	onStatusChange : function(aWebProgress, aRequest, aStatus, aMessage) {
 	},

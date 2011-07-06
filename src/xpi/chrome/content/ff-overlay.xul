@@ -13,9 +13,12 @@
 	</stringbundleset>
 
 	<popup id="contentAreaContextMenu">
+		<menuitem id="context-on-link-remoteit" label="&remoteitContext.label;"
+			accesskey="&remoteitContext.accesskey;" insertafter="context-stop"
+			oncommand="remoteit.onLinkMenuItemCommand(event)" />
 		<menuitem id="context-remoteit" label="&remoteitContext.label;"
 			accesskey="&remoteitContext.accesskey;" insertafter="context-stop"
-			oncommand="remoteit.onMenuItemCommand(event)" />
+			oncommand="remoteit.onNonLinkMenuItemCommand(event)" />
 	</popup>
 
 	<!-- <toolbarpalette id="BrowserToolbarPalette"> -->
