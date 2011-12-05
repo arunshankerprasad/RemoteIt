@@ -12,8 +12,9 @@ var remoteItUtils = {
 	},
 
 	debug : function(msg) {
-		if (this.DEBUG) {
-			alert(msg);
+		// Only alert in debug is enabled
+		if (this.DEBUG == true) {
+			// alert(msg);
 		}
 	},
 
@@ -60,33 +61,33 @@ var remoteItUtils = {
 			// https://remote.plus.net/apps/blagnys@portal.plus.net/kbdfaults/confirm/,DanaInfo=workplace.plus.net,SSL+cli
 			var ssl = (this.shouldWeUseSSL(input) ? this.ssl_handle : "");
 			return this.remote_plus_net_url_base
-					+ input.replace(/(ftp|http|https|file):\/\//gim, "").replace(/^(.*?)\/?(.*?\/?.*?)([^\/]*$)/gim,
-							"$2" + this.dana_info_handle + "$1" + ssl + "+$3");
+				+ input.replace(/(ftp|http|https|file):\/\//gim, "").replace(/^(.+?)\/(.*?\/?.*?)([^\/]*$)/gim,
+						"$2" + this.dana_info_handle + "$1" + ssl + "+$3");
 			// .replace(/[\S]+(\b|$)/gim, "$&");
 		},
 
 		isProblemUrl : function(kwrd) {
-			return kwrd.replace(/(ftp|http|https|file):\/\//gim, "").search(/(p|problem):/gim) != -1;
+			return kwrd.replace(/(ftp|http|https|file):\/\//gim, "").search(/^(p|problem):[0-9]+.*?$/gim) != -1;
 		},
 
 		isJobUrl : function(kwrd) {
-			return kwrd.replace(/(ftp|http|https|file):\/\//gim, "").search(/(j|job):/gim) != -1;
+			return kwrd.replace(/(ftp|http|https|file):\/\//gim, "").search(/^(j|job):[0-9]+.*?$/gim) != -1;
 		},
 
 		isTaskUrl : function(kwrd) {
-			return kwrd.replace(/(ftp|http|https|file):\/\//gim, "").search(/(t|task):/gim) != -1;
+			return kwrd.replace(/(ftp|http|https|file):\/\//gim, "").search(/^(t|task):[0-9]+.*?$/gim) != -1;
 		},
 
 		getProblemUrl : function(kwrd) {
-			return this.problem_url + kwrd.replace(/(ftp|http|https|file):\/\//gim, "").replace(/^.*?(p|problem):(.*)\/(.*)/gim, "$2");
+			return this.problem_url + kwrd.replace(/(ftp|http|https|file):\/\//gim, "").replace(/^.*?(p|problem):([0-9]+).*?/gim, "$2");
 		},
 
 		getJobUrl : function(kwrd) {
-			return this.job_url + kwrd.replace(/(ftp|http|https|file):\/\//gim, "").replace(/^.*?(j|job):(.*)\/(.*)/gim, "$2");
+			return this.job_url + kwrd.replace(/(ftp|http|https|file):\/\//gim, "").replace(/^.*?(j|job):([0-9]+).*?/gim, "$2");
 		},
 
 		getTaskUrl : function(kwrd) {
-			return this.task_url + kwrd.replace(/(ftp|http|https|file):\/\//gim, "").replace(/^.*?(t|task):(.*)\/(.*)/gim, "$2");
+			return this.task_url + kwrd.replace(/(ftp|http|https|file):\/\//gim, "").replace(/^.*?(t|task):([0-9]+).*?/gim, "$2");
 		},
 
 		shouldWeUseSSL : function(input) {
